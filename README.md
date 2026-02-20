@@ -18,18 +18,22 @@ Automatiza o registro de ponto na plataforma **MarqPonto** com login simples, no
 
 ## Bot Telegram — Comandos
 
-| Comando | Ação |
-|---|---|
-| `/desativar DD/MM/YYYY` | Pula o ponto nessa data |
-| `/reativar DD/MM/YYYY` | Cancela um desativar |
-| `/status` | Verifica se hoje está ativo |
-| `/listar` | Mostra datas desativadas |
+Quando **SISTEMA_PONTO** está definido (ex: `Irede`), os comandos usam o prefixo em minúsculas com underscore: `/irede_desativar`, `/irede_reativar`, etc. Caso contrário, use `/desativar`, `/reativar`, etc.
+
+| Comando (com prefixo, ex: Irede) | Comando (sem prefixo) | Ação |
+|---|---|---|
+| `/irede_desativar DD/MM/YYYY` | `/desativar DD/MM/YYYY` | Pula o ponto nessa data |
+| `/irede_reativar DD/MM/YYYY` | `/reativar DD/MM/YYYY` | Cancela um desativar |
+| `/irede_status` | `/status` | Verifica se hoje está ativo |
+| `/irede_listar` | `/listar` | Mostra datas desativadas |
 
 **Notificações automáticas:**
 - ✅ Ponto registrado com sucesso
 - ❌ Erro ao bater ponto (após 3 tentativas)
 - ⚠️ Tentativa falhou, retentando em 30s
 - ⏸️ Ponto desativado para hoje
+
+O horário exibido nas mensagens do Telegram é o de **Manaus** (America/Manaus).
 
 > **Nota:** As datas desativadas são persistidas em um GitHub Gist, sem limite de tempo. Datas passadas são removidas automaticamente.
 
@@ -49,10 +53,13 @@ Copie o template e preencha com seus dados:
 cp .env.example .env
 ```
 
-Edite o `.env`:
+Edite o `.env` (o arquivo `.env.example` traz o template completo):
 
 ```env
-# Credenciais
+# Nome do sistema (prefixo nas mensagens e nos comandos do Telegram, ex: "Irede" → "Irede - Ponto registrado!" e /irede_desativar)
+SISTEMA_PONTO=Irede
+
+# Credenciais MarqPonto
 MARQPONTO_USER=seu.email@empresa.com.br
 MARQPONTO_PASS=sua_senha
 
@@ -164,6 +171,8 @@ Permite rodar o ponto automaticamente na nuvem (GitHub) ou manualmente sob deman
 ### 1. Configuração dos secrets
 
 No repositório, acesse **Settings → Secrets and variables → Actions** e adicione:
+
+**Secrets:**
 
 | Secret | Valor |
 |---|---|
