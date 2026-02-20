@@ -156,14 +156,14 @@ Método recomendado de execução — cron nativo, sem delay.
    0 22 * * 1-5 cd /opt/app && /usr/bin/node src/index.js >> /opt/app/logs/cron.log 2>&1
    ```
 
-| Cron (UTC) | Brasília | Batida |
-|---|---|---|
-| 0 13 | 10:00 | Entrada |
-| 0 16 | 13:00 | Saída almoço |
-| 0 17 | 14:00 | Retorno almoço |
-| 0 22 | 19:00 | Saída |
+| Cron (UTC) | Brasília | Manaus | Batida |
+|---|---|---|---|
+| 0 13 | 10:00 | 09:00 | Entrada |
+| 0 16 | 13:00 | 12:00 | Saída almoço |
+| 0 17 | 14:00 | 13:00 | Retorno almoço |
+| 0 22 | 19:00 | 18:00 | Saída |
 
-> **Dica:** Para alterar o fuso da VM para Brasília: `timedatectl set-timezone America/Sao_Paulo`
+> **Dica:** Para definir o fuso da VM: Brasília — `timedatectl set-timezone America/Sao_Paulo` | Manaus — `timedatectl set-timezone America/Manaus`
 
 
 ## GitHub Actions (execução automática e manual)
@@ -246,7 +246,7 @@ Cria tarefas às 10:00, 13:00, 14:00 e 19:00 (Seg-Sex, horário de Brasília).
     ├── index.js              # Script principal (login → ponto + retry)
     ├── log-cleanup.js        # Limpeza mensal de arquivos em logs/ (retenção 30 dias)
     ├── logger.js             # Logger com Winston (console + arquivo rotativo)
-    └── notify.js             # Notificações Telegram
+    └── notify.js             # Notificações Telegram (horário em Manaus)
 ```
 
 ## Troubleshooting
