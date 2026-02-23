@@ -354,10 +354,11 @@ async function executar() {
       const pontoOk = await registrarPonto(page);
       if (pontoOk) {
         await notifySuccess();
+        logger.info('=== Automação concluída com sucesso ===');
       } else {
         await notifyError('Botão de registrar ponto não encontrado');
+        throw new Error('Botão de registrar ponto não encontrado');
       }
-      logger.info('=== Automação concluída com sucesso ===');
     }
   } finally {
     if (!config.debug) {
