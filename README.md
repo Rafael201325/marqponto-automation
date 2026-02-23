@@ -170,6 +170,8 @@ Método recomendado de execução — cron nativo, sem delay.
 
 Permite rodar o ponto automaticamente na nuvem (GitHub) ou manualmente sob demanda.
 
+> **Observação sobre horários exatos:** apesar de existir suporte a `schedule` direto no GitHub Actions, para garantir que as batidas aconteçam nos horários exatos, recomenda-se manter o workflow apenas com `workflow_dispatch` e usar um serviço externo de cron (por exemplo, `console.cron-job.org`) para chamar a URL de disparo do workflow nos horários desejados.
+
 ### 1. Configuração dos secrets
 
 No repositório, acesse **Settings → Secrets and variables → Actions** e adicione:
