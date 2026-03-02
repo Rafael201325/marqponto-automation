@@ -29,7 +29,7 @@ async function debugScreenshot(page, name) {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/** Retorna o horário da batida atual (09:00, 12:00, 13:00 ou 18:00) em Manaus. */
+/** Retorna o horário da batida atual (08:00, 12:00, 13:00 ou 17:00) em Manaus. */
 function getBatidaAtual() {
   const now = new Date();
   const formatter = new Intl.DateTimeFormat('pt-BR', {
@@ -42,10 +42,10 @@ function getBatidaAtual() {
   const hour = parseInt(parts.find(p => p.type === 'hour').value, 10);
   const minute = parseInt(parts.find(p => p.type === 'minute').value, 10);
   const totalMinutes = hour * 60 + minute;
-  if (totalMinutes < 11 * 60) return '09:00';   // entrada
+  if (totalMinutes < 11 * 60) return '08:00';   // entrada
   if (totalMinutes < 13 * 60) return '12:00';  // saída almoço
   if (totalMinutes < 14 * 60) return '13:00'; // retorno almoço
-  return '18:00';                               // saída
+  return '17:00';                               // saída
 }
 
 // ---------------------------------------------------------------------------
